@@ -319,6 +319,7 @@ class Simulator(gym.Env):
         self.accept_start_angle_deg = accept_start_angle_deg
 
         # Load the map
+        self.mapname = map_name
         self._load_map(map_name)
 
         # Distortion params, if so, load the library, only if not bbox mode
@@ -397,7 +398,7 @@ class Simulator(gym.Env):
 
         # Robot's current speed
         self.speed = 0.0
-
+        self._load_map(self.mapname)
         if self.randomize_maps_on_reset:
             map_name = self.np_random.choice(self.map_names)
             logger.info(f"Random map chosen: {map_name}")
